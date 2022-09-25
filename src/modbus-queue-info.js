@@ -1,5 +1,5 @@
 /**
- Copyright (c) 2016,2017,2018,2019,2020,2021 Klaus Landsdorf (https://bianco-royal.space/)
+ Copyright (c) 2016,2017,2018,2019,2020,2021,2022 Klaus Landsdorf (http://node-red.plus/)
  All rights reserved.
  node-red-contrib-modbus - The BSD 3-Clause License
 
@@ -65,8 +65,9 @@ module.exports = function (RED) {
     }
 
     node.errorProtocolMsg = function (err, msg) {
-      mbBasics.logMsgError(node, err, msg)
-      mbBasics.sendEmptyMsgOnFail(node, err, msg)
+      if (node.showErrors) {
+        mbBasics.logMsgError(node, err, msg)
+      }
     }
 
     node.initUnitQueueStates()
@@ -81,7 +82,7 @@ module.exports = function (RED) {
           state: 'low level reached',
           unitid: unit,
           modbusClientName: modbusClient.name,
-          bufferCommandListLength: bufferCommandListLength
+          bufferCommandListLength
         }
         node.send(msg)
       }
@@ -100,7 +101,7 @@ module.exports = function (RED) {
           unitid: unit,
           modbusClientName: modbusClient.name || modbusClient.id,
           highLevel: node.highLevel,
-          bufferCommandListLength: bufferCommandListLength
+          bufferCommandListLength
         }
 
         if (node.errorOnHighLevel) {
@@ -127,7 +128,7 @@ module.exports = function (RED) {
           modbusClientName: modbusClient.name || modbusClient.id,
           highLevel: node.highLevel,
           highHighLevel: node.highHighLevel,
-          bufferCommandListLength: bufferCommandListLength
+          bufferCommandListLength
         }
         node.error(new Error('Queue High High Level Reached'), msg)
         node.send(msg)
@@ -277,6 +278,7 @@ module.exports = function (RED) {
           }
         } catch (err) {
           node.errorProtocolMsg(err, msg)
+          mbBasics.sendEmptyMsgOnFail(node, err, msg)
           msgUnitId = node.unitid
         }
         msg.payload.allQueueData = false
