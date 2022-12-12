@@ -9113,9 +9113,9 @@ vinyl@^2.0.0, vinyl@^2.1.0:
     replace-ext "^1.0.0"
 
 vm2@~3.9.5:
-  version "3.9.7"
-  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.9.7.tgz#bb87aa677c97c61e23a6cb6547e44e990517a6f6"
-  integrity sha512-g/GZ7V0Mlmch3eDVOATvAXr1GsJNg6kQ5PjvYy3HbJMCRn5slNbo/u73Uy7r5yUej1cRa3ZjtoVwcWSQuQ/fow==
+  version "3.9.13"
+  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.9.13.tgz#774a1a3d73b9b90b1aa45bcc5f25e349f2eef649"
+  integrity sha512-0rvxpB8P8Shm4wX2EKOiMp7H2zq+HUE/UwodY0pCZXs9IffIKZq6vUti5OgkVCTakKo9e/fgO4X1fkwfjWxE3Q==
   dependencies:
     acorn "^8.7.0"
     acorn-walk "^8.2.0"
