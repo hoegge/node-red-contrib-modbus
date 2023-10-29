@@ -1,5 +1,5 @@
 /**
- Copyright (c) 2017,2018,2019,2020,2021 Klaus Landsdorf (https://bianco-royal.space/)
+ Copyright (c) 2017,2018,2019,2020,2021,2022 Klaus Landsdorf (http://node-red.plus/)
  All rights reserved.
  node-red-contrib-modbus - The BSD 3-Clause License
 
@@ -31,6 +31,7 @@ module.exports = function (RED) {
 
     this.showStatusActivities = config.showStatusActivities
     this.showErrors = config.showErrors
+    this.showWarnings = config.showWarnings
 
     this.ioFile = RED.nodes.getNode(config.ioFile)
 
@@ -74,7 +75,9 @@ module.exports = function (RED) {
           if (node.showErrors) {
             node.error(new Error(msg.payload.length + ' does not match ' + node.registers))
           }
-          mbCore.internalDebug(msg.payload.length + ' Registers And Filter Length Of ' + node.registers + ' Does Not Match')
+          if (node.showWarnings) {
+            mbCore.internalDebug(msg.payload.length + ' Registers And Filter Length Of ' + node.registers + ' Does Not Match')
+          }
         } else {
           node.send(node.filterFromPayload(msg))
         }

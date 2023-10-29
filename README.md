@@ -5,26 +5,40 @@
 ![ES_Deploy_Version](http://b.repl.ca/v1/JS_Deploy-ES2015-yellow.png)
 ![NodeJS_Version](http://b.repl.ca/v1/NodeJS-LTS-green.png)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![NPM download](https://img.shields.io/npm/dm/node-red-contrib-modbus.svg)](http://www.npm-stats.com/~packages/node-red-contrib-modbus)
-[![Build Status](https://app.travis-ci.com/biancode/node-red-contrib-modbus.svg?branch=master)](https://app.travis-ci.com/biancode/node-red-contrib-modbus)
+[![NPM download](https://img.shields.io/npm/dm/node-red-contrib-modbus.svg)](https://npm-stat.com/charts.html?package=node-red-contrib-modbus)
+[![Build and publish](https://github.com/BiancoRoyal/node-red-contrib-modbus/actions/workflows/build.yml/badge.svg)](https://github.com/BiancoRoyal/node-red-contrib-modbus/actions/workflows/build.yml)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6cbeb40ab5604b3ab99e6badc9469e8a)](https://www.codacy.com/gh/BiancoRoyal/node-red-contrib-modbus?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BiancoRoyal/node-red-contrib-modbus&amp;utm_campaign=Badge_Grade)
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/BiancoRoyal/node-red-contrib-modbus)
 
 # node-red-contrib-modbus
 
-## The all in one Modbus TCP and Serial contribution package for Node-RED.
+### The all-in-one Modbus TCP and Serial contribution package for Node-RED
 
 [![nodemodbus64](images/modbus-icon64.png)](https://www.npmjs.com/package/node-red-contrib-modbus)
 
-[Node-RED][1] contribution package for [Modbus][8]
+## International IIoT Website for Node-RED
+
+For an international area, [Iniationware][15] has provided the [PLUS for Node-RED International][16] website.
+
+## IIoT Webseite Deutschland für Node-RED 
+
+Für einen deutschsprachigen Bereich hat [Iniationware][15] die Webseite [PLUS for Node-RED Germany][17] bereitgestellt.
+
+## Contribution Information
+
+[Node-RED][1] contribution package for [Modbus][8] version overview:
 
 Based on [modbus-serial][2] with TCP, C701, Telnet, Serial, RTU buffered, and ASCII
 
 * stress tested with Node-RED v1.0.4 and Node.js LTS
 * works with queueing per unit and round robin scheduling
 
+Node-RED v3.x versions:
+* Node.JS 18.x will be supported with v5.22+
+* Node.JS 16.x will be supported with v5.22+
+
 Node-RED v2.x versions:
-* Node.JS 17.x will be supported with v6
+* Node.JS 18.x will be supported with v5.22+
 * Node.JS 16.x will be supported with v5.20+
 * Node.JS 14.x is supported with v5.14+
 * Node.JS 12.x is supported with v5.x
@@ -92,6 +106,11 @@ or global by
 
 ![Flow Example](images/Screenshot01V210.png)
 
+## Errors
+
+Since v5.22+ the package will catch network and other errors of the client and server node. 
+That means, you have to handle the error status of the node and Node-RED should not crash in the handled cases.
+
 ## Debug
 
 Debug will be activated by starting Node-RED with debug mode:
@@ -107,7 +126,7 @@ see [Wiki][10] pages to get more options in detail
 ## Contributing
 
 Let's work together! Contributors are welcome.
-Please, for the repo and send your pull requests from your repo 
+Please, fork the repo and send your pull requests from your repo 
 to our develop branch or open issues while you're testing!
 
 ## For Developers
@@ -150,6 +169,9 @@ since April 2016 by [Klaus Landsdorf][4] and Community Driven
 [12]:https://github.com/BiancoRoyal/node-red-contrib-modbus
 [13]:https://www.npmjs.com/package/jsmodbus
 [14]:https://www.npmjs.com/package/serialport
+[15]:https://iniationware.com/
+[16]:https://www.noderedplus.de/
+[17]:https://www.noderedplus.de/de/
 
 ## Contributors
 
