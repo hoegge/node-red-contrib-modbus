@@ -16,13 +16,13 @@
 
 [![nodemodbus64](images/modbus-icon64.png)](https://www.npmjs.com/package/node-red-contrib-modbus)
 
-## International Node-RED IIoT Website
+## International IIoT Website for Node-RED
 
-For an international area, [Iniationware][15] has provided the [Node-RED PLUS International][16] website.
+For an international area, [Iniationware][15] has provided the [PLUS for Node-RED International][16] website.
 
-## Node-RED IIoT Webseite Deutschland
+## IIoT Webseite Deutschland für Node-RED 
 
-Für einen deutschsprachigen Bereich hat [Iniationware][15] die Webseite [Node-RED PLUS Germany][17] bereitgestellt.
+Für einen deutschsprachigen Bereich hat [Iniationware][15] die Webseite [PLUS for Node-RED Germany][17] bereitgestellt.
 
 ## Contribution Information
 
@@ -37,7 +37,7 @@ Node-RED v3.x versions:
 * Node.JS 18.x will be supported with v5.22+
 * Node.JS 16.x will be supported with v5.22+
 
-* Node-RED v2.x versions:
+Node-RED v2.x versions:
 * Node.JS 18.x will be supported with v5.22+
 * Node.JS 16.x will be supported with v5.20+
 * Node.JS 14.x is supported with v5.14+
@@ -126,7 +126,7 @@ see [Wiki][10] pages to get more options in detail
 ## Contributing
 
 Let's work together! Contributors are welcome.
-Please, for the repo and send your pull requests from your repo 
+Please, fork the repo and send your pull requests from your repo 
 to our develop branch or open issues while you're testing!
 
 ## For Developers
@@ -170,8 +170,8 @@ since April 2016 by [Klaus Landsdorf][4] and Community Driven
 [13]:https://www.npmjs.com/package/jsmodbus
 [14]:https://www.npmjs.com/package/serialport
 [15]:https://iniationware.com/
-[16]:http://node-red.plus/
-[17]:http://node-red-plus.de/
+[16]:https://www.noderedplus.de/
+[17]:https://www.noderedplus.de/de/
 
 ## Contributors
 

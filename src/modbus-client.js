@@ -21,12 +21,13 @@ module.exports = function (RED) {
   const coreModbusClient = require('./core/modbus-client-core')
   const coreModbusQueue = require('./core/modbus-queue-core')
   const internalDebugLog = require('debug')('contribModbus:config:client')
+  const _ = require('underscore')
 
   function ModbusClientNode (config) {
     RED.nodes.createNode(this, config)
 
     // create an empty modbus client
-    const ModbusRTU = require('modbus-serial')
+    const ModbusRTU = require('@open-p4nr/modbus-serial')
 
     const unlimitedListeners = 0
     const minCommandDelayMilliseconds = 1
@@ -75,6 +76,10 @@ module.exports = function (RED) {
       this.parallelUnitIdsAllowed = config.parallelUnitIdsAllowed
     }
 
+    this.showErrors = config.showErrors
+    this.showWarnings = config.showWarnings
+    this.showLogs = config.showLogs
+
     const node = this
     node.isFirstInitOfConnection = true
     node.closingModbus = false
@@ -82,7 +87,7 @@ module.exports = function (RED) {
     node.bufferCommandList = new Map()
     node.sendingAllowed = new Map()
     node.unitSendingAllowed = []
-    node.messageAllowedStates = coreModbusClient.messagesAllowedStates
+    node.messageAllowedStates = coreModbusClient.messageAllowedStates
     node.serverInfo = ''
 
     node.stateMachine = null
@@ -128,14 +133,20 @@ module.exports = function (RED) {
     }
 
     function verboseWarn (logMessage) {
-      if (RED.settings.verbose) {
+      if (RED.settings.verbose && node.showWarnings) {
         node.updateServerinfo()
         node.warn('Client -> ' + logMessage + ' ' + node.serverInfo)
       }
     }
 
+    node.errorProtocolMsg = function (err, msg) {
+      if (node.showErrors) {
+        mbBasics.logMsgError(node, err, msg)
+      }
+    }
+
     function verboseLog (logMessage) {
-      if (RED.settings.verbose) {
+      if (RED.settings.verbose && node.showLogs) {
         coreModbusClient.internalDebug('Client -> ' + logMessage + ' ' + node.serverInfo)
       }
     }
@@ -516,10 +527,13 @@ module.exports = function (RED) {
       node.stateService.send('CLOSE')
     }
 
+    node.on('customModbusMessage', function (msg, cb, cberr) {
+      // const state = node.actualServiceState
+      coreModbusClient.customModbusMessage(node, msg, cb, cberr)
+    })
     node.on('readModbus', function (msg, cb, cberr) {
       const state = node.actualServiceState
-
-      if (node.messageAllowedStates.indexOf(state.value) === -1) {
+      if (node.isInactive()) {
         cberr(new Error('Client Not Ready To Read At State ' + state.value), msg)
       } else {
         if (node.bufferCommands) {
@@ -544,7 +558,7 @@ module.exports = function (RED) {
     node.on('writeModbus', function (msg, cb, cberr) {
       const state = node.actualServiceState
 
-      if (node.messageAllowedStates.indexOf(state.value) === -1) {
+      if (node.isInactive()) {
         cberr(new Error('Client Not Ready To Write At State ' + state.value), msg)
       } else {
         if (node.bufferCommands) {
@@ -695,6 +709,22 @@ module.exports = function (RED) {
         node.error(err)
         done()
       }
+    }
+
+    node.isInactive = function () {
+      return _.isUndefined(node.actualServiceState) || node.messageAllowedStates.indexOf(node.actualServiceState.value) === -1
+    }
+
+    node.isActive = function () {
+      return !node.isInactive()
+    }
+
+    node.isReadyToSend = function (node) {
+      if (node.actualServiceState.matches('queueing')) {
+        return true
+      }
+      verboseWarn('Client not ready to send')
+      return false
     }
   }
 

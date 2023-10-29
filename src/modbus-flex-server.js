@@ -15,7 +15,7 @@
 module.exports = function (RED) {
   'use strict'
   // SOURCE-MAP-REQUIRED
-  const ModbusRTU = require('modbus-serial')
+  const ModbusRTU = require('@open-p4nr/modbus-serial')
   const coreServer = require('./core/modbus-server-core')
   const mbBasics = require('./modbus-basics')
   const internalDebugLog = require('debug')('contribModbus:flex:server')
@@ -161,7 +161,7 @@ module.exports = function (RED) {
         if (node.showErrors) {
           node.error('Is Not A Valid Memory Write Message To Server', msg)
         }
-        if (!msg.payload.disableMsgOutput) {
+        if (coreServer.isValidMessage(msg) && !msg.payload.disableMsgOutput) {
           node.send(buildMessage(msg))
         }
       }
